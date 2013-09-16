@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.song.hbm.model">
+	<class name="Customer" table="customers" lazy="true">
+		<id name="id" column="id" type="integer">
+			<generator class="increment"></generator>
+		</id>
+		<property name="age" column="age" type="integer"></property>
+		<property name="name" column="name" type="string"></property>
+		<property name="des" column="des" type="text"></property>
+		<property name="price" column="price" type="double"></property>
+		<property name="total" formula="(select avg(c.price) from customers c)"></property>
+		
+		<set name="orders" table="orders" inverse="true" lazy="false" fetch="join">
+			<key>
+				<column name="customer_id"></column>
+			</key>
+			<one-to-many class="Order" />
+		</set>
+		
+<!-- 		<component name="homeAddress" class="Address"> -->
+<!-- 			<parent name="Customer"/> -->
+<!-- 			<property name="city" column="home_city"></property> -->
+<!-- 			<property name="street" column="home_street"></property> -->
+<!-- 			<property name="zipcode" column="home_zipcode"></property> -->
+<!-- 			<property name="province" column="home_province"></property> -->
+<!-- 		</component> -->
+<!-- 		<component name="comAddress" class="Address"> -->
+<!-- 			<parent name="Customer"/> -->
+<!-- 			<property name="city" column="com_city"></property> -->
+<!-- 			<property name="street" column="com_street"></property> -->
+<!-- 			<property name="zipcode" column="com_zipcode"></property> -->
+<!-- 			<property name="province" column="com_province"></property> -->
+<!-- 		</component> -->
+	</class>
+
+	<class name="Order" table="orders">
+		<id name="id" column="id">
+			<generator class="increment"></generator>
+		</id>
+		<property name="orderNum" column="order_num" type="string"></property>
+		<property name="price" column="price" type="double"></property>
+		<many-to-one name="customer" column="customer_id" class="Customer" cascade="save-update"
+			not-null="true"></many-to-one>
+	</class>
+
+<!-- 	<class name="Student" table="students"  lazy="false"> -->
+<!-- 		<id name="id" column="id" type="integer"> -->
+<!-- 			<generator class="increment"></generator> -->
+<!-- 		</id> -->
+<!-- 		<property name="name" column="name" type="string"></property> -->
+<!-- 		<set name="courses" table="student_course" inverse="true" > -->
+<!-- 		<key column="sid"></key> -->
+<!-- 			<many-to-many class="Course" column="cid"/> -->
+<!-- 		</set> -->
+<!-- <set name="courses" table="courses" cascade="save-update"> -->
+<!-- <key> -->
+<!-- <column name="course_id"></column> -->
+<!-- </key> -->
+<!-- <one-to-many class="Course"/> -->
+<!-- </set> -->
+<!-- 	</class> -->
+	
+<!-- 	<class name="Course" table="courses" lazy="false"> -->
+<!-- 		<id name="id" column="id" type="integer"> -->
+<!-- 			<generator class="increment"></generator> -->
+<!-- 		</id> -->
+<!-- 		<property name="name" column="string" type="string"></property> -->
+<!-- 		<set name="stus" table="student_course" inverse="false"> -->
+<!-- 			<key column="cid"/> -->
+<!-- 		<many-to-many class="Student" column="sid"></many-to-many> -->
+<!-- 		</set> -->
+	
+<!-- 	</class> -->
+	
+</hibernate-mapping>

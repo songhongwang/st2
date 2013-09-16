@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.action.extension" value="action,do," />
+
+	 
+    <package name="default" namespace="/" extends="struts-default">
+
+        <default-action-ref name="index" />
+
+        <global-results>
+            <result name="error">pages/error.jsp</result>
+        </global-results>
+
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>
+
+        <action name="*_add" class="com.song.st3.{1}">
+        	<result>pages/front{1}.jsp</result>
+        </action>
+        <action name="login" class="com.song.st3.Login">
+        	<result>pages/frontAuthor.jsp</result>
+        	<result name="input">pages/login.jsp</result>
+        </action>
+    </package>
+
+
+    <!-- Add packages here -->
+
+</struts>

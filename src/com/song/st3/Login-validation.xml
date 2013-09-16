@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE validators PUBLIC
+  		"-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+	<field name="name">
+		<field-validator type="requiredstring" >
+			<message>请输入姓名</message>
+		</field-validator>
+	</field>
+	<field name="password">
+		<field-validator type="fad">
+		<param name="fda"></param>
+		<message>fd</message>
+		</field-validator>
+	</field>
+	<field name="age">
+		<field-validator type="int">
+			<param name="min">13</param>
+			<param name="max">19</param>
+			<message>年龄为13~19周岁的才允许填写</message>
+		</field-validator>
+	</field>
+
+</validators>
+		
